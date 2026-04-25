@@ -34,6 +34,56 @@
       },
       "registered_skills": [],
       "installed_at": "2026-04-25T05:02:23.230614+00:00"
+    },
+    "qa": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:ae004b14dc6b480ed50acf7608d14223dbd83ceba6b05582cdd742cb9301c334",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "codex": [
+          "speckit.qa.run"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-04-25T05:34:41.517038+00:00"
+    },
+    "spectest": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:316a0349d05ae4728fcdd951e434eab96691b4e8f1e6e6fbe5e69f73207bb950",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "codex": [
+          "speckit.spectest.generate",
+          "speckit.spectest.coverage",
+          "speckit.spectest.gaps",
+          "speckit.spectest.plan"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-04-25T05:37:51.068944+00:00"
+    },
+    "wireframe": {
+      "version": "0.1.1",
+      "source": "local",
+      "manifest_hash": "sha256:246ce4f535c9149c28fa28d38fb7642034b17c44a62d13a59474a2272b753172",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "codex": [
+          "speckit.wireframe.generate",
+          "speckit.wireframe.prep",
+          "speckit.wireframe.review",
+          "speckit.wireframe.inspect",
+          "speckit.wireframe.screenshots",
+          "speckit.wireframe.view"
+        ]
+      },
+      "registered_skills": [],
+      "installed_at": "2026-04-25T05:39:31.347845+00:00"
     }
   }
 }

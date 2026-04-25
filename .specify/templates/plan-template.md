@@ -23,6 +23,7 @@
 **Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
 **Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
+**Architecture Decision**: [layers/modules affected, dependency direction, contracts/interfaces or NEEDS CLARIFICATION]
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
@@ -33,13 +34,17 @@
 
 - **Code Quality**: Technical approach follows existing project patterns, keeps
   scope focused, and documents any new abstraction or complexity.
-- **Testing Standards**: Test strategy covers changed behavior, regression risk,
-  and integration or contract boundaries for each affected user journey.
+- **Architecture Guidelines**: Plan names affected layers/modules, dependency
+  direction, changed contracts, and migration/versioning needs.
+- **Unit Testing Standards**: Unit test strategy covers deterministic local
+  behavior, validation, mapping, calculations, and boundary conditions.
+- **End-to-End and Regression Testing**: Plan identifies critical user journeys,
+  cross-boundary coverage, regression risks, and the required verification command.
 - **User Experience Consistency**: Plan identifies affected UI states,
   accessibility expectations, copy/navigation conventions, and validation method.
 - **Performance Requirements**: Plan states measurable budgets for latency,
-  startup, rendering, processing, memory, or bundle size, or explains why none
-  apply.
+  startup, rendering, processing, memory, database query count, or bundle size, or
+  explains why none apply.
 - **Maintainability**: Documentation, contracts, and operational notes that change
   with the feature are listed explicitly.
 

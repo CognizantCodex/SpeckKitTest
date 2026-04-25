@@ -34,6 +34,14 @@ hooks:
     prompt: Commit outstanding changes before planning?
     description: Auto-commit before implementation planning
     condition: null
+  - extension: wireframe
+    command: speckit.wireframe.review
+    enabled: true
+    optional: true
+    prompt: Review and sign off wireframes before planning? (signed-off wireframes
+      become spec constraints)
+    description: Ensure wireframes are reviewed and signed off before plan is written
+    condition: null
   before_tasks:
   - extension: git
     command: speckit.git.commit
@@ -90,6 +98,13 @@ hooks:
     prompt: Commit specification changes?
     description: Auto-commit after specification
     condition: null
+  - extension: wireframe
+    command: speckit.wireframe.generate
+    enabled: true
+    optional: true
+    prompt: Generate wireframes for this feature now?
+    description: Offer wireframe generation after spec creation
+    condition: null
   after_clarify:
   - extension: git
     command: speckit.git.commit
@@ -128,6 +143,28 @@ hooks:
     optional: true
     prompt: Commit implementation changes?
     description: Auto-commit after implementation
+    condition: null
+  - extension: qa
+    command: speckit.qa.run
+    enabled: true
+    optional: true
+    prompt: Run QA testing?
+    description: Validates acceptance criteria through browser-driven or CLI-based
+      testing
+    condition: null
+  - extension: spectest
+    command: speckit.spectest.gaps
+    enabled: true
+    optional: true
+    prompt: Check for untested spec requirements?
+    description: Scan for spec requirements with no matching tests after implementation
+    condition: null
+  - extension: wireframe
+    command: speckit.wireframe.screenshots
+    enabled: true
+    optional: true
+    prompt: Capture implementation screenshots and compare to signed-off wireframes?
+    description: 'Regression check: compare implementation to approved wireframes'
     condition: null
   after_checklist:
   - extension: git

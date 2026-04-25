@@ -75,6 +75,15 @@
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
 
+### Testing Requirements *(mandatory)*
+
+- **UT-001**: Unit-level behavior that MUST be covered: [validation, mapping,
+  calculation, state transition, boundary condition, or N/A with rationale]
+- **E2E-001**: Critical user journey that MUST be covered end-to-end:
+  [primary success path or N/A with rationale]
+- **REG-001**: Regression risks that MUST be protected: [previously broken or
+  high-risk behavior, or N/A with rationale]
+
 ### User Experience Requirements *(include for user-facing changes)*
 
 - **UX-001**: Primary journey MUST preserve existing navigation, terminology, and
@@ -103,6 +112,11 @@
 
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+
+### Architecture Constraints *(include when implementation spans modules/layers)*
+
+- **AC-001**: Feature MUST preserve [layer/module/contract boundary] by [expected dependency direction or interface].
+- **AC-002**: Any changed contract MUST include [migration/versioning/backward compatibility expectation].
 
 ### Key Entities *(include if feature involves data)*
 
