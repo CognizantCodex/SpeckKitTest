@@ -1,0 +1,386 @@
+openapi: 3.1.0
+info:
+  title: Multimodal Insight Generation API
+  version: 0.1.0
+  description: Contract for local workspace, content, insight, evidence, and brief operations.
+servers:
+  - url: http://localhost:8000
+paths:
+  /workspaces:
+    get:
+      summary: List workspaces
+      operationId: listWorkspaces
+      responses:
+        "200":
+          description: Workspaces returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Workspace"
+    post:
+      summary: Create workspace
+      operationId: createWorkspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkspaceRequest"
+      responses:
+        "201":
+          description: Workspace created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+  /workspaces/{workspaceId}:
+    get:
+      summary: Get workspace details
+      operationId: getWorkspace
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      responses:
+        "200":
+          description: Workspace returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceDetail"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /workspaces/{workspaceId}/content:
+    post:
+      summary: Add content item metadata after local upload
+      operationId: addContentItem
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddContentItemRequest"
+      responses:
+        "201":
+          description: Content item accepted for validation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentItem"
+  /workspaces/{workspaceId}/generate:
+    post:
+      summary: Start insight generation
+      operationId: startInsightGeneration
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      responses:
+        "202":
+          description: Insight generation started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InsightSet"
+        "409":
+          description: Workspace cannot start generation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /workspaces/{workspaceId}/insight-sets/{insightSetId}:
+    get:
+      summary: Get generated insight set
+      operationId: getInsightSet
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+        - $ref: "#/components/parameters/InsightSetId"
+      responses:
+        "200":
+          description: Insight set returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InsightSetDetail"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /workspaces/{workspaceId}/insights/{insightId}/review:
+    patch:
+      summary: Update insight review status
+      operationId: updateInsightReview
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+        - $ref: "#/components/parameters/InsightId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateInsightReviewRequest"
+      responses:
+        "200":
+          description: Insight updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Insight"
+  /workspaces/{workspaceId}/briefs:
+    post:
+      summary: Create insight brief
+      operationId: createBrief
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBriefRequest"
+      responses:
+        "201":
+          description: Brief created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InsightBrief"
+        "409":
+          description: Brief blocked by restricted or unavailable sources
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  parameters:
+    WorkspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      schema:
+        type: string
+    InsightSetId:
+      name: insightSetId
+      in: path
+      required: true
+      schema:
+        type: string
+    InsightId:
+      name: insightId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Requested resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    CreateWorkspaceRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    Workspace:
+      type: object
+      required: [id, name, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [draft, ready, generating, reviewing, brief_ready, archived]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    WorkspaceDetail:
+      allOf:
+        - $ref: "#/components/schemas/Workspace"
+        - type: object
+          required: [contentItems, insightSets, briefs]
+          properties:
+            contentItems:
+              type: array
+              items:
+                $ref: "#/components/schemas/ContentItem"
+            insightSets:
+              type: array
+              items:
+                $ref: "#/components/schemas/InsightSet"
+            briefs:
+              type: array
+              items:
+                $ref: "#/components/schemas/InsightBrief"
+    AddContentItemRequest:
+      type: object
+      required: [displayName, contentType, filePath, fileSizeBytes]
+      properties:
+        displayName:
+          type: string
+        contentType:
+          type: string
+          enum: [document, image, audio, video]
+        mediaType:
+          type: string
+        filePath:
+          type: string
+        fileSizeBytes:
+          type: integer
+          minimum: 0
+    ContentItem:
+      type: object
+      required: [id, workspaceId, displayName, contentType, validationStatus, processingStatus]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        displayName:
+          type: string
+        contentType:
+          type: string
+          enum: [document, image, audio, video]
+        validationStatus:
+          type: string
+          enum: [pending, valid, unsupported, corrupted, encrypted, empty, duplicate, failed]
+        processingStatus:
+          type: string
+          enum: [not_started, queued, processing, processed, partial, failed, skipped]
+        restrictionStatus:
+          type: string
+          enum: [none, restricted, unavailable]
+        failureReason:
+          type: string
+    InsightSet:
+      type: object
+      required: [id, workspaceId, status]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        status:
+          type: string
+          enum: [queued, generating, completed, partial, failed, cancelled]
+        summary:
+          type: string
+        failureSummary:
+          type: string
+    InsightSetDetail:
+      allOf:
+        - $ref: "#/components/schemas/InsightSet"
+        - type: object
+          required: [insights]
+          properties:
+            insights:
+              type: array
+              items:
+                $ref: "#/components/schemas/Insight"
+    Insight:
+      type: object
+      required: [id, insightSetId, statement, relevance, confidence, reviewStatus, rank, evidence]
+      properties:
+        id:
+          type: string
+        insightSetId:
+          type: string
+        statement:
+          type: string
+        relevance:
+          type: string
+          enum: [high, medium, low]
+        confidence:
+          type: string
+          enum: [high, medium, low, unknown]
+        originatingContentType:
+          type: string
+          enum: [document, image, audio, video]
+        reviewStatus:
+          type: string
+          enum: [unreviewed, approved, duplicative, irrelevant, follow_up]
+        duplicateGroupId:
+          type: string
+        rank:
+          type: integer
+        evidence:
+          type: array
+          items:
+            $ref: "#/components/schemas/EvidenceReference"
+    EvidenceReference:
+      type: object
+      required: [id, insightId, contentItemId, referenceType, referenceLabel]
+      properties:
+        id:
+          type: string
+        insightId:
+          type: string
+        contentItemId:
+          type: string
+        referenceType:
+          type: string
+          enum: [page, region, timestamp, segment, file, unknown]
+        referenceLabel:
+          type: string
+        excerpt:
+          type: string
+        confidenceContext:
+          type: string
+    UpdateInsightReviewRequest:
+      type: object
+      required: [reviewStatus]
+      properties:
+        reviewStatus:
+          type: string
+          enum: [approved, duplicative, irrelevant, follow_up]
+    CreateBriefRequest:
+      type: object
+      required: [title, insightIds]
+      properties:
+        title:
+          type: string
+        insightIds:
+          type: array
+          minItems: 1
+          items:
+            type: string
+    InsightBrief:
+      type: object
+      required: [id, workspaceId, title, summary, status, insights]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+        status:
+          type: string
+          enum: [draft, ready, shared, exported, blocked]
+        insights:
+          type: array
+          items:
+            $ref: "#/components/schemas/Insight"
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
