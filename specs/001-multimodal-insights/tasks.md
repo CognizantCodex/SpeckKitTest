@@ -1,7 +1,7 @@
 # Tasks: Multimodal Insight Generation
 
 **Input**: Design documents from `/specs/001-multimodal-insights/`
-**Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/openapi.yaml, contracts/swagger.md, contracts/ui-flows.md, quickstart.md
+**Prerequisites**: plan.md, spec.md, research.md, data-model.md, frontend-component-architecture.md, contracts/openapi.yaml, contracts/swagger.md, contracts/ui-flows.md, quickstart.md
 
 **Tests**: Required by specification and constitution. Tasks are ordered per user request: spec-driven setup, wireframes, UI, database/schema, API, unit tests, end-to-end tests, then regression tests.
 
@@ -37,8 +37,8 @@
 - [ ] T013 Create backend application service package exports in backend/src/app/application/__init__.py
 - [ ] T014 Create backend repository package exports in backend/src/app/repositories/__init__.py
 - [ ] T015 Create frontend API client base in frontend/src/services/apiClient.ts
-- [ ] T016 Create frontend shared UI state components in frontend/src/components/StatusState.tsx
-- [ ] T017 Create frontend accessibility helpers in frontend/src/components/a11y.ts
+- [ ] T016 Create frontend shared feedback state components in frontend/src/components/feedback/StatusState.tsx
+- [ ] T017 Create frontend accessibility live region helper in frontend/src/components/a11y/LiveRegion.tsx
 - [ ] T018 Create SQLite migration runner in backend/src/app/repositories/migrations.py
 - [ ] T019 Create initial SQLite schema migration file in backend/src/app/repositories/migrations/001_initial.sql
 - [ ] T020 Create test fixtures for sample multimodal content metadata in backend/tests/fixtures/content_items.json
@@ -243,16 +243,31 @@
 - [ ] T127 [US3] Add E2E test for sharing and exporting a brief in frontend/tests/e2e/us3-share-export-brief.spec.ts
 - [ ] T128 [US3] Add regression test that share/export preserves citations and provenance in backend/tests/regression/test_brief_share_export_provenance.py
 
-## Phase 7: Cross-Story Quality Gates
+## Phase 7: React Component Architecture Alignment
+
+**Purpose**: Align the implemented React frontend with the documented component architecture before final cross-story validation.
+
+- [ ] T129 [P] Create app shell layout component in frontend/src/components/layout/AppShell.tsx
+- [ ] T130 [P] Create workspace navigation component in frontend/src/components/layout/WorkspaceNavigation.tsx
+- [ ] T131 [P] Create shared button primitive in frontend/src/components/primitives/Button.tsx
+- [ ] T132 [P] Create shared panel primitive in frontend/src/components/primitives/Panel.tsx
+- [ ] T133 [P] Create shared status badge primitive in frontend/src/components/primitives/StatusBadge.tsx
+- [ ] T134 [US1] Extract content validation workflow hook in frontend/src/features/content-intake/hooks/useContentValidation.ts
+- [ ] T135 [US2] Extract deferred insight filter hook in frontend/src/features/insight-review/hooks/useInsightFilters.ts
+- [ ] T136 [US3] Extract brief builder workflow hook in frontend/src/features/brief-builder/hooks/useBriefBuilder.ts
+- [ ] T137 Add lazy-loading boundaries for evidence and brief preview routes in frontend/src/app/routes.tsx
+- [ ] T138 Add component architecture coverage tests in frontend/tests/component/component-architecture.test.tsx
+
+## Phase 8: Cross-Story Quality Gates
 
 **Purpose**: Run final checks that span all stories and documentation.
 
-- [ ] T129 Validate Swagger/OpenAPI contract with lint command in specs/001-multimodal-insights/contracts/openapi.yaml
-- [ ] T130 Update Swagger documentation notes in specs/001-multimodal-insights/contracts/swagger.md
-- [ ] T131 Run backend unit, integration, contract, and regression suite from backend/tests/
-- [ ] T132 Run frontend unit, component, and E2E suite from frontend/tests/
-- [ ] T133 Run quickstart validation flow and record results in specs/001-multimodal-insights/quickstart.md
-- [ ] T134 Update traceability map with completed task references in specs/001-multimodal-insights/traceability.md
+- [ ] T139 Validate Swagger/OpenAPI contract with lint command in specs/001-multimodal-insights/contracts/openapi.yaml
+- [ ] T140 Update Swagger documentation notes in specs/001-multimodal-insights/contracts/swagger.md
+- [ ] T141 Run backend unit, integration, contract, and regression suite from backend/tests/
+- [ ] T142 Run frontend unit, component, and E2E suite from frontend/tests/
+- [ ] T143 Run quickstart validation flow and record results in specs/001-multimodal-insights/quickstart.md
+- [ ] T144 Update traceability map with completed task references in specs/001-multimodal-insights/traceability.md
 
 ## Dependencies & Execution Order
 
@@ -264,7 +279,8 @@
 - User Story 2 depends on generated insights from User Story 1.
 - User Story 3 depends on approved insights from User Story 2.
 - Phase 6 remediation coverage runs after the related user story surfaces exist.
-- Phase 7 runs after all desired user stories and remediation coverage are complete.
+- Phase 7 runs after all desired user stories and remediation coverage are complete, then aligns the React implementation with the component architecture.
+- Phase 8 runs after React architecture alignment and all desired user stories are complete.
 
 ### User Story Dependencies
 
@@ -295,6 +311,8 @@
 - US2 unit tests T072-T076 can run in parallel.
 - US3 wireframes T081-T082 and UI components T084-T087 can run in parallel.
 - US3 unit tests T098-T102 can run in parallel.
+- React architecture alignment tasks T129-T133 can run in parallel because they create separate shared component files.
+- Feature hook extraction tasks T134-T136 can run in parallel because they target separate feature folders.
 
 ## Parallel Example: User Story 1
 
@@ -323,7 +341,8 @@ Task: "Unit test frontend content intake states in frontend/tests/unit/content-i
 2. US2 adds review, filtering, evidence inspection, and status classification.
 3. US3 adds approved insight brief creation and sharing safeguards.
 4. Phase 6 closes analysis gaps for history, evidence, share/export, media bounds, and performance.
-5. Phase 7 verifies cross-story contracts, Swagger docs, tests, and quickstart.
+5. Phase 7 aligns the React implementation with the component architecture.
+6. Phase 8 verifies cross-story contracts, Swagger docs, tests, and quickstart.
 
 ### Format Validation
 

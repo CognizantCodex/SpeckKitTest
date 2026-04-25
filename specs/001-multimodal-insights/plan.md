@@ -11,7 +11,9 @@ Build a web application that lets users create a workspace, add unstructured
 documents, images, audio, and video, generate ranked insights with source
 provenance, review and classify those insights, then create a shareable insight
 brief. The frontend will be a React application focused on upload, progress,
-review, evidence inspection, and brief creation flows. The backend will be a
+review, evidence inspection, and brief creation flows, with a documented
+component architecture for app shell, shared UI, feature components, hooks,
+services, and test ownership. The backend will be a
 Python application exposing clear service contracts for content intake, analysis
 orchestration, insight review, and brief generation, documented with
 OpenAPI/Swagger files. SQLite stores local metadata, state, provenance, review
@@ -28,7 +30,8 @@ referenced by metadata records.
 browser with local backend service
 **Project Type**: Web application with separate frontend and backend packages
 **Architecture Decision**: React frontend depends on backend HTTP contracts
-documented in OpenAPI/Swagger files; backend separates API routes, application
+documented in OpenAPI/Swagger files and follows the component architecture in
+`frontend-component-architecture.md`; backend separates API routes, application
 services, domain models, analysis adapters, persistence repositories, and local
 file storage. Domain services do not depend on transport, UI, or SQLite details.
 **Performance Goals**: Show upload validation feedback within 2 seconds for
@@ -79,6 +82,7 @@ specs/001-multimodal-insights/
 |-- plan.md
 |-- research.md
 |-- data-model.md
+|-- frontend-component-architecture.md
 |-- quickstart.md
 |-- contracts/
 |   |-- openapi.yaml
@@ -112,6 +116,10 @@ frontend/
 |-- src/
 |   |-- app/
 |   |-- components/
+|   |   |-- a11y/
+|   |   |-- feedback/
+|   |   |-- layout/
+|   |   `-- primitives/
 |   |-- features/
 |   |   |-- workspace/
 |   |   |-- content-intake/
@@ -135,7 +143,10 @@ data/
 **Structure Decision**: Use a web application layout with separate `frontend/`
 and `backend/` packages. Keep SQLite metadata and file artifacts under `data/`
 for local development. Use `contracts/` to lock the OpenAPI/Swagger API
-documentation and UI flow expectations before task generation.
+documentation and UI flow expectations before task generation. Use
+`frontend-component-architecture.md` to keep React routing, shared components,
+feature components, hooks, services, performance expectations, and test
+ownership consistent.
 
 ## Complexity Tracking
 

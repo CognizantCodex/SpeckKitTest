@@ -25,11 +25,14 @@ cd specs/001-multimodal-insights && npx @redocly/cli lint contracts/openapi.yaml
 
 Python backend: keep API routes, application services, domain models, repositories, and analysis adapters separate.
 API contracts: keep OpenAPI/Swagger files source-controlled and synchronized with backend route behavior.
-React frontend: keep upload, generation progress, insight review, evidence, and brief builder UI states independently testable.
+React frontend: follow specs/001-multimodal-insights/frontend-component-architecture.md, keep app shell and routes in frontend/src/app, shared UI in frontend/src/components, and domain workflows in frontend/src/features.
+React performance: use direct imports instead of broad barrel files, lazy load evidence and brief preview surfaces, and use deferred or transition updates for expensive insight filtering.
+React testing: keep upload, generation progress, insight review, evidence, and brief builder UI states independently testable with unit, component, and E2E coverage.
 
 ## Recent Changes
 
 - 001-multimodal-insights: Added React frontend, Python backend, local SQLite metadata storage, OpenAPI contracts, and E2E/regression quality gates.
+- 001-multimodal-insights: Added React component architecture guidance for app shell, shared UI, feature components, hooks, services, performance, accessibility, and testing.
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->
