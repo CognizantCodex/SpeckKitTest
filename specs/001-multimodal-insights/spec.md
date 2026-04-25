@@ -149,6 +149,12 @@ summary.
   each workspace.
 - **FR-015**: System MUST provide clear status updates during upload, analysis,
   review, and sharing.
+- **FR-016**: System MUST support first-release content limits for PDF, DOCX,
+  TXT, CSV, PNG, JPG, TIFF, MP3, WAV, M4A, MP4, and MOV files, with a maximum of
+  500 MB per item and a maximum audio/video duration of 2 hours per item.
+- **FR-017**: Users MUST be able to share or export an insight brief while
+  preserving citations, provenance, and warnings for restricted or unavailable
+  sources.
 
 ### Architecture Constraints
 
@@ -193,8 +199,9 @@ summary.
 
 - Initial users are knowledge workers, analysts, researchers, and team leads who
   need to synthesize information from multiple content formats.
-- The first release supports common business documents, common image formats, and
-  standard audio/video recordings with reasonable size limits.
+- The first release supports PDF, DOCX, TXT, CSV, PNG, JPG, TIFF, MP3, WAV, M4A,
+  MP4, and MOV files, with a maximum of 500 MB per item and a maximum audio/video
+  duration of 2 hours per item.
 - User authentication, workspace ownership, and access control already exist or
   will be provided by the host product.
 - Content retention follows the organization's standard data retention and privacy

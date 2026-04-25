@@ -216,16 +216,43 @@
 
 **Checkpoint**: US3 can create a shareable brief from approved insights with citations and provenance preserved.
 
-## Phase 6: Cross-Story Quality Gates
+## Phase 6: Remediation Coverage
+
+**Purpose**: Close analysis gaps for history, share/export, evidence contracts, media bounds, and performance measurement.
+
+- [ ] T107 [US1] Add supported media type and size/duration constants in backend/src/app/domain/content_item.py
+- [ ] T108 [P] [US1] Unit test supported file extensions, 500 MB file limit, and 2 hour audio/video limit in backend/tests/unit/test_content_limits.py
+- [ ] T109 [P] [US1] Create performance fixture workspace in backend/tests/fixtures/performance_workspace.json
+- [ ] T110 [US1] Add backend performance integration test for generation timing in backend/tests/integration/test_generation_performance.py
+- [ ] T111 [US1] Add frontend performance E2E test for upload validation, progress visibility, and review latency in frontend/tests/e2e/performance.spec.ts
+- [ ] T112 [US1] Record performance check results in specs/001-multimodal-insights/performance-results.md
+- [ ] T113 [US1] Implement insight set history query in backend/src/app/repositories/insight_repository.py
+- [ ] T114 [US1] Implement insight set history API route in backend/src/app/api/insight_sets.py
+- [ ] T115 [US1] Create workspace history UI for generated insight sets in frontend/src/features/workspace/WorkspaceHistory.tsx
+- [ ] T116 [US1] Add E2E test for viewing prior insight sets in frontend/tests/e2e/workspace-history.spec.ts
+- [ ] T117 [US2] Implement dedicated evidence retrieval API route in backend/src/app/api/evidence.py
+- [ ] T118 [US2] Add contract test for evidence retrieval route in backend/tests/contract/test_evidence_openapi_contract.py
+- [ ] T119 [US3] Implement brief history query in backend/src/app/repositories/brief_repository.py
+- [ ] T120 [US3] Implement brief history API route in backend/src/app/api/briefs.py
+- [ ] T121 [US3] Extend workspace history UI with brief history in frontend/src/features/workspace/WorkspaceHistory.tsx
+- [ ] T122 [US3] Add E2E test for viewing prior briefs in frontend/tests/e2e/workspace-brief-history.spec.ts
+- [ ] T123 [P] [US3] Create brief share/export controls in frontend/src/features/brief-builder/BriefShareActions.tsx
+- [ ] T124 [US3] Implement brief share/export API routes in backend/src/app/api/briefs.py
+- [ ] T125 [US3] Implement brief export formatting service in backend/src/app/application/brief_export_service.py
+- [ ] T126 [US3] Add contract tests for brief share/export operations in backend/tests/contract/test_brief_share_export_contract.py
+- [ ] T127 [US3] Add E2E test for sharing and exporting a brief in frontend/tests/e2e/us3-share-export-brief.spec.ts
+- [ ] T128 [US3] Add regression test that share/export preserves citations and provenance in backend/tests/regression/test_brief_share_export_provenance.py
+
+## Phase 7: Cross-Story Quality Gates
 
 **Purpose**: Run final checks that span all stories and documentation.
 
-- [ ] T107 Validate Swagger/OpenAPI contract with lint command in specs/001-multimodal-insights/contracts/openapi.yaml
-- [ ] T108 Update Swagger documentation notes in specs/001-multimodal-insights/contracts/swagger.md
-- [ ] T109 Run backend unit, integration, contract, and regression suite from backend/tests/
-- [ ] T110 Run frontend unit, component, and E2E suite from frontend/tests/
-- [ ] T111 Run quickstart validation flow and record results in specs/001-multimodal-insights/quickstart.md
-- [ ] T112 Update traceability map with completed task references in specs/001-multimodal-insights/traceability.md
+- [ ] T129 Validate Swagger/OpenAPI contract with lint command in specs/001-multimodal-insights/contracts/openapi.yaml
+- [ ] T130 Update Swagger documentation notes in specs/001-multimodal-insights/contracts/swagger.md
+- [ ] T131 Run backend unit, integration, contract, and regression suite from backend/tests/
+- [ ] T132 Run frontend unit, component, and E2E suite from frontend/tests/
+- [ ] T133 Run quickstart validation flow and record results in specs/001-multimodal-insights/quickstart.md
+- [ ] T134 Update traceability map with completed task references in specs/001-multimodal-insights/traceability.md
 
 ## Dependencies & Execution Order
 
@@ -236,7 +263,8 @@
 - User Story 1 is the MVP and should complete before User Story 2 or User Story 3 integration.
 - User Story 2 depends on generated insights from User Story 1.
 - User Story 3 depends on approved insights from User Story 2.
-- Phase 6 runs after all desired user stories are complete.
+- Phase 6 remediation coverage runs after the related user story surfaces exist.
+- Phase 7 runs after all desired user stories and remediation coverage are complete.
 
 ### User Story Dependencies
 
@@ -294,7 +322,8 @@ Task: "Unit test frontend content intake states in frontend/tests/unit/content-i
 1. US1 delivers content intake and generated insights.
 2. US2 adds review, filtering, evidence inspection, and status classification.
 3. US3 adds approved insight brief creation and sharing safeguards.
-4. Phase 6 verifies cross-story contracts, Swagger docs, tests, and quickstart.
+4. Phase 6 closes analysis gaps for history, evidence, share/export, media bounds, and performance.
+5. Phase 7 verifies cross-story contracts, Swagger docs, tests, and quickstart.
 
 ### Format Validation
 

@@ -38,6 +38,7 @@ Represents a document, image, audio file, or video file selected for analysis.
 - `media_type`: Detected file media type.
 - `file_path`: Local stored file path.
 - `file_size_bytes`: Source size in bytes.
+- `duration_seconds`: Optional duration for audio and video content.
 - `checksum`: Duplicate detection checksum.
 - `validation_status`: `pending`, `valid`, `unsupported`, `corrupted`,
   `encrypted`, `empty`, `duplicate`, `failed`.
@@ -57,6 +58,10 @@ Represents a document, image, audio file, or video file selected for analysis.
 
 - File path must point to a local file managed by the application.
 - Content type must be derived from supported media categories.
+- Supported media types are PDF, DOCX, TXT, CSV, PNG, JPG, TIFF, MP3, WAV, M4A,
+  MP4, and MOV for the first release.
+- File size must not exceed 500 MB per item.
+- Audio and video duration must not exceed 2 hours per item.
 - Duplicate items must retain a reference to the original checksum match.
 
 ## InsightSet
@@ -159,6 +164,9 @@ Represents a shareable package of approved insights.
 - `created_at`: Creation timestamp.
 - `updated_at`: Last update timestamp.
 - `shared_at`: Optional sharing timestamp.
+- `exported_at`: Optional export timestamp.
+- `share_location`: Optional location or identifier returned after sharing.
+- `export_location`: Optional local export path or identifier.
 
 **Relationships**
 
@@ -171,6 +179,8 @@ Represents a shareable package of approved insights.
 - Briefs must not include restricted, failed, or unavailable source items without
   a user warning.
 - Ready, shared, and exported briefs must preserve citations and provenance.
+- Share and export actions must record warnings when restricted, failed, or
+  unavailable sources are involved.
 
 ## BriefInsight
 

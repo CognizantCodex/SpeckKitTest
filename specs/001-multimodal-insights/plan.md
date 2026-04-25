@@ -40,10 +40,10 @@ collections; keep insight filtering and review interactions under 1 second for
 partial content failures; keep metadata local in SQLite; do not block the review
 flow on failed or unsupported content; keep UI states accessible and keyboard
 operable.
-**Scale/Scope**: First release targets single-user local workspaces, common
-business documents, common image formats, and standard audio/video recordings
-with reasonable size limits. Multi-user collaboration and cloud storage are out
-of scope for this plan.
+**Scale/Scope**: First release targets single-user local workspaces with PDF,
+DOCX, TXT, CSV, PNG, JPG, TIFF, MP3, WAV, M4A, MP4, and MOV files up to 500 MB
+per item and audio/video duration up to 2 hours per item. Multi-user
+collaboration and cloud storage are out of scope for this plan.
 
 ## Constitution Check
 

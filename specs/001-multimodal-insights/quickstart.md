@@ -53,7 +53,8 @@ frontend, Python backend, and SQLite metadata store.
 
 1. Open the frontend in a browser.
 2. Create a workspace named `Multimodal Test Workspace`.
-3. Add one sample document, image, audio file, and video file.
+3. Add one sample document, image, audio file, and video file using supported
+   formats: PDF, DOCX, TXT, CSV, PNG, JPG, TIFF, MP3, WAV, M4A, MP4, or MOV.
 4. Confirm validation feedback appears within 2 seconds for each standard file.
 5. Start insight generation.
 6. Confirm progress appears within 5 seconds.
@@ -65,8 +66,11 @@ frontend, Python backend, and SQLite metadata store.
 10. Mark at least three insights approved and one insight duplicative or
    irrelevant.
 11. Create an insight brief from approved insights.
-12. Confirm the brief includes summary, selected insights, citations,
+12. Share or export the insight brief.
+13. Confirm the brief includes summary, selected insights, citations,
     provenance, generation date, and review status.
+14. Return to the workspace history and confirm prior insight sets and briefs
+    are visible.
 
 ## Test Commands
 
@@ -107,7 +111,9 @@ Regression tests must cover:
 - Partial analysis failure still returns successful insights from valid content.
 - Every approved insight keeps at least one source reference.
 - Brief creation preserves citations and provenance.
-- Restricted, failed, or unavailable sources trigger warnings before sharing.
+- Brief share/export preserves citations and provenance.
+- Restricted, failed, or unavailable sources trigger warnings before sharing or
+  exporting.
 
 ## Performance Checks
 

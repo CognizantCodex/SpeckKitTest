@@ -17,10 +17,13 @@ Swagger documentation MUST expose these operation groups:
 
 - Workspaces: list, create, and inspect workspace details.
 - Content: register uploaded content metadata and validation status.
-- Generation: start insight generation and inspect generation status.
-- Insights: retrieve generated insights and update review status.
-- Evidence: expose source references through insight response payloads.
-- Briefs: create and inspect insight briefs.
+- Generation: start insight generation, inspect generation status, and list
+  prior insight sets for workspace history.
+- Insights: retrieve generated insights, update review status, and expose a
+  dedicated evidence retrieval route.
+- Evidence: expose source references through insight response payloads and
+  dedicated evidence operations.
+- Briefs: create, inspect, list, share, and export insight briefs.
 
 ## Documentation Quality Rules
 
@@ -31,6 +34,8 @@ Swagger documentation MUST expose these operation groups:
 - Error responses MUST use the shared `Error` schema.
 - Review, status, confidence, relevance, modality, and restriction fields MUST
   enumerate allowed values.
+- Share/export operations MUST document whether provenance was preserved and any
+  warnings caused by restricted or unavailable sources.
 
 ## Local Validation
 

@@ -69,6 +69,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ContentItem"
+  /workspaces/{workspaceId}/insight-sets:
+    get:
+      summary: List generated insight sets for workspace history
+      operationId: listInsightSets
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      responses:
+        "200":
+          description: Insight set history returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InsightSet"
   /workspaces/{workspaceId}/generate:
     post:
       summary: Start insight generation
@@ -104,6 +119,24 @@ paths:
                 $ref: "#/components/schemas/InsightSetDetail"
         "404":
           $ref: "#/components/responses/NotFound"
+  /workspaces/{workspaceId}/insights/{insightId}/evidence:
+    get:
+      summary: List evidence references for an insight
+      operationId: listInsightEvidence
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+        - $ref: "#/components/parameters/InsightId"
+      responses:
+        "200":
+          description: Evidence references returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EvidenceReference"
+        "404":
+          $ref: "#/components/responses/NotFound"
   /workspaces/{workspaceId}/insights/{insightId}/review:
     patch:
       summary: Update insight review status
@@ -125,6 +158,20 @@ paths:
               schema:
                 $ref: "#/components/schemas/Insight"
   /workspaces/{workspaceId}/briefs:
+    get:
+      summary: List insight briefs for workspace history
+      operationId: listBriefs
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+      responses:
+        "200":
+          description: Brief history returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InsightBrief"
     post:
       summary: Create insight brief
       operationId: createBrief
@@ -149,6 +196,58 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /workspaces/{workspaceId}/briefs/{briefId}/share:
+    post:
+      summary: Share an insight brief
+      operationId: shareBrief
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+        - $ref: "#/components/parameters/BriefId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BriefActionRequest"
+      responses:
+        "200":
+          description: Brief shared
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BriefActionResult"
+        "409":
+          description: Brief blocked by restricted or unavailable sources
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /workspaces/{workspaceId}/briefs/{briefId}/export:
+    post:
+      summary: Export an insight brief
+      operationId: exportBrief
+      parameters:
+        - $ref: "#/components/parameters/WorkspaceId"
+        - $ref: "#/components/parameters/BriefId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BriefActionRequest"
+      responses:
+        "200":
+          description: Brief exported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BriefActionResult"
+        "409":
+          description: Brief blocked by restricted or unavailable sources
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   parameters:
     WorkspaceId:
@@ -165,6 +264,12 @@ components:
         type: string
     InsightId:
       name: insightId
+      in: path
+      required: true
+      schema:
+        type: string
+    BriefId:
+      name: briefId
       in: path
       required: true
       schema:
@@ -233,11 +338,17 @@ components:
           enum: [document, image, audio, video]
         mediaType:
           type: string
+          enum: [application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/plain, text/csv, image/png, image/jpeg, image/tiff, audio/mpeg, audio/wav, audio/mp4, video/mp4, video/quicktime]
         filePath:
           type: string
         fileSizeBytes:
           type: integer
           minimum: 0
+          maximum: 524288000
+        durationSeconds:
+          type: integer
+          minimum: 0
+          maximum: 7200
     ContentItem:
       type: object
       required: [id, workspaceId, displayName, contentType, validationStatus, processingStatus]
@@ -373,6 +484,32 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Insight"
+    BriefActionRequest:
+      type: object
+      properties:
+        includeRestrictedSources:
+          type: boolean
+          default: false
+        format:
+          type: string
+          enum: [link, markdown, pdf]
+    BriefActionResult:
+      type: object
+      required: [briefId, status, provenancePreserved]
+      properties:
+        briefId:
+          type: string
+        status:
+          type: string
+          enum: [shared, exported, blocked]
+        location:
+          type: string
+        provenancePreserved:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     Error:
       type: object
       required: [code, message]
