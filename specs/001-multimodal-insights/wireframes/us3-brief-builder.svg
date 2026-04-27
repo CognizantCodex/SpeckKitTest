@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Brief builder wireframe">
+  <rect width="960" height="540" fill="#f6f7f8"/>
+  <rect x="32" y="36" width="430" height="468" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="78" font-family="Arial" font-size="22" fill="#202124">Approved insights</text>
+  <rect x="56" y="116" width="382" height="52" rx="6" fill="#ffffff" stroke="#d0d5dd"/>
+  <rect x="56" y="188" width="382" height="52" rx="6" fill="#ffffff" stroke="#d0d5dd"/>
+  <rect x="498" y="36" width="430" height="468" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="522" y="78" font-family="Arial" font-size="22" fill="#202124">Brief preview</text>
+  <rect x="522" y="116" width="382" height="240" rx="6" fill="#eef4f3" stroke="#0f766e"/>
+  <rect x="522" y="388" width="160" height="42" rx="6" fill="#0f766e"/>
+</svg>

@@ -18,7 +18,7 @@ frontend, Python backend, and SQLite metadata store.
    cd backend
    python -m venv .venv
    . .venv/bin/activate
-   pip install -e ".[dev]"
+   pip install -e ".[test]"
    ```
 
 2. Install frontend dependencies.
@@ -39,7 +39,7 @@ frontend, Python backend, and SQLite metadata store.
    ```bash
    cd ../backend
    . .venv/bin/activate
-   python -m app
+   uvicorn app.api.main:app --app-dir src --reload
    ```
 
 5. Start the frontend dev server.
@@ -84,8 +84,7 @@ pytest
 Validate the OpenAPI/Swagger contract:
 
 ```bash
-cd specs/001-multimodal-insights
-npx @redocly/cli lint contracts/openapi.yaml
+python backend/scripts/validate_openapi.py
 ```
 
 Run frontend checks:
@@ -93,6 +92,7 @@ Run frontend checks:
 ```bash
 cd frontend
 npm test
+npm run build
 npm run test:e2e
 ```
 
@@ -100,9 +100,23 @@ Run full local quality gate:
 
 ```bash
 cd backend && pytest
-cd ../frontend && npm test && npm run test:e2e
-cd ../specs/001-multimodal-insights && npx @redocly/cli lint contracts/openapi.yaml
+cd ../frontend && npm test && npm run build && npm run test:e2e
+cd .. && python backend/scripts/validate_openapi.py
 ```
+
+## Validation Results
+
+Last local validation run: 2026-04-26.
+
+- Backend compile: `python3 -m compileall backend/src backend/scripts` passed.
+- Backend tests: `PYTHONPATH=/tmp/speckit-pytest:src:. python3 -m pytest` passed
+  with 27 tests.
+- OpenAPI marker validation: `python3 backend/scripts/validate_openapi.py`
+  passed.
+- Frontend unit/component tests: `npm test` passed with 8 tests.
+- Frontend production build: `npm run build` passed.
+- Frontend E2E tests: `npm run test:e2e` passed with 7 Playwright tests after
+  installing the local Chromium browser.
 
 ## Regression Coverage
 

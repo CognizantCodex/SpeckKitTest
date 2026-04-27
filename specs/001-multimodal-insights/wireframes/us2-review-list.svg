@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Insight review list wireframe">
+  <rect width="960" height="540" fill="#f6f7f8"/>
+  <rect x="32" y="32" width="896" height="70" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="75" font-family="Arial" font-size="22" fill="#202124">Insight review</text>
+  <rect x="32" y="132" width="896" height="54" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="165" font-family="Arial" font-size="14" fill="#667085">Search | Type | Relevance | Review status</text>
+  <rect x="32" y="216" width="896" height="86" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <rect x="32" y="324" width="896" height="86" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <rect x="32" y="432" width="896" height="70" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+</svg>

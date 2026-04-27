@@ -1,0 +1,27 @@
+{
+  "workspace": {
+    "name": "Performance fixture",
+    "description": "Standard mixed-content collection for timing checks"
+  },
+  "content_items": [
+    {
+      "display_name": "market-summary.pdf",
+      "file_path": "data/uploads/market-summary.pdf",
+      "file_size_bytes": 2048,
+      "checksum": "market-summary"
+    },
+    {
+      "display_name": "customer-call.wav",
+      "file_path": "data/uploads/customer-call.wav",
+      "file_size_bytes": 4096,
+      "duration_seconds": 180,
+      "checksum": "customer-call"
+    },
+    {
+      "display_name": "storefront.png",
+      "file_path": "data/uploads/storefront.png",
+      "file_size_bytes": 1024,
+      "checksum": "storefront"
+    }
+  ]
+}

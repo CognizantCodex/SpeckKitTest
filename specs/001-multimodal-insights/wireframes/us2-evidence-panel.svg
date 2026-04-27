@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Evidence panel wireframe">
+  <rect width="960" height="540" fill="#f6f7f8"/>
+  <rect x="32" y="42" width="540" height="456" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="84" font-family="Arial" font-size="22" fill="#202124">Selected insight</text>
+  <rect x="612" y="42" width="316" height="456" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="636" y="84" font-family="Arial" font-size="22" fill="#202124">Evidence</text>
+  <rect x="636" y="122" width="268" height="86" rx="6" fill="#eef4f3" stroke="#0f766e"/>
+  <rect x="636" y="232" width="268" height="86" rx="6" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="148" font-family="Arial" font-size="14" fill="#667085">Evidence opens without leaving review flow</text>
+</svg>

@@ -1,0 +1,15 @@
+:root {
+  color-scheme: light;
+  --color-bg: #f6f7f8;
+  --color-surface: #ffffff;
+  --color-text: #202124;
+  --color-muted: #667085;
+  --color-border: #d0d5dd;
+  --color-primary: #0f766e;
+  --color-primary-strong: #115e59;
+  --color-accent: #7c2d12;
+  --color-good: #166534;
+  --color-warning: #92400e;
+  --color-bad: #991b1b;
+  --shadow-soft: 0 12px 30px rgba(16, 24, 40, 0.08);
+}

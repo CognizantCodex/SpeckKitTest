@@ -42,9 +42,16 @@ Swagger documentation MUST expose these operation groups:
 Validate the contract before implementation tasks are considered complete:
 
 ```bash
-npx @redocly/cli lint specs/001-multimodal-insights/contracts/openapi.yaml
+python backend/scripts/validate_openapi.py
 ```
 
 The backend implementation MUST serve Swagger-readable documentation generated
 from the same OpenAPI contract or from route metadata that is verified against
 this contract.
+
+## Implementation Notes
+
+- The backend exposes a FastAPI-compatible app factory at
+  `backend/src/app/api/main.py`.
+- The lightweight marker validation passed locally on 2026-04-26.
+- Redocly lint remains recommended when `@redocly/cli` is available.

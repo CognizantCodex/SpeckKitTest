@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.DS_Store
+
+node_modules/
+dist/
+test-results/
+playwright-report/
+*.tsbuildinfo
+
+data/app.sqlite
+data/uploads/*
+!data/uploads/.gitkeep
+data/previews/*
+!data/previews/.gitkeep

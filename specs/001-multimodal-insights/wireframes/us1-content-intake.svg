@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Workspace and content intake wireframe">
+  <rect width="960" height="540" fill="#f6f7f8"/>
+  <rect x="32" y="28" width="896" height="64" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="67" font-family="Arial" font-size="22" fill="#202124">Workspace setup</text>
+  <rect x="32" y="124" width="540" height="360" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="56" y="166" font-family="Arial" font-size="20" fill="#202124">Content intake</text>
+  <rect x="56" y="196" width="492" height="92" rx="8" fill="#eef4f3" stroke="#0f766e" stroke-dasharray="8 6"/>
+  <text x="88" y="248" font-family="Arial" font-size="16" fill="#202124">Add multimodal content</text>
+  <rect x="56" y="316" width="492" height="42" rx="6" fill="#ffffff" stroke="#d0d5dd"/>
+  <rect x="56" y="374" width="492" height="42" rx="6" fill="#ffffff" stroke="#d0d5dd"/>
+  <rect x="620" y="124" width="308" height="360" rx="8" fill="#ffffff" stroke="#d0d5dd"/>
+  <text x="644" y="166" font-family="Arial" font-size="20" fill="#202124">Validation states</text>
+  <circle cx="656" cy="214" r="7" fill="#166534"/>
+  <text x="676" y="220" font-family="Arial" font-size="14" fill="#202124">Valid</text>
+  <circle cx="656" cy="254" r="7" fill="#92400e"/>
+  <text x="676" y="260" font-family="Arial" font-size="14" fill="#202124">Partial</text>
+  <circle cx="656" cy="294" r="7" fill="#991b1b"/>
+  <text x="676" y="300" font-family="Arial" font-size="14" fill="#202124">Failed</text>
+</svg>

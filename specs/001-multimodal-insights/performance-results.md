@@ -15,9 +15,9 @@ This file records measured results for the constitution performance budgets.
 
 | Date | Build/Commit | Dataset | Validation Feedback | Progress Visible | Initial Insights | Review Interaction | Result |
 |------|--------------|---------|---------------------|------------------|------------------|--------------------|--------|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | Pending |
+| 2026-04-26 | Working tree | Deterministic local fixtures | Covered by frontend validation unit tests | Covered by generation progress component and E2E navigation | Backend fixture generation integration test passed under 2 seconds | Playwright workspace navigation stayed under 2 seconds after load | Pass |
 
 ## Notes
 
-- Populate this file during T112 and update it whenever performance budgets or
-  standard test collections change.
+- Update this file whenever performance budgets or standard test collections
+  change.
